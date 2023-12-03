@@ -1,4 +1,5 @@
-#Wey micro code （Wey Small Console）
+####Wey micro code （Wey Small Console）
+
 Wey Small Console is an editor based on Boxy and various project combinations
 
 #### Wey micro code 入门
