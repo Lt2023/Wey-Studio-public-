@@ -1,12 +1,27 @@
-# Wey-Studio-public-
-Wey Studio For Public
-Wey在开源路上一直都在前沿，wey相信开源，之上无处不在。
+# Wey Studio For Public
 
-##🆕试试看！
+Wey has always been at the forefront of open source, believing in open source and ubiquitous.
+
+## 🚀 Try It Out!
+
+## 🆕1. Wey micro code dev
 
 
-https://github.com/Lt2023/Wey-Studio-public-/assets/122614217/421d836f-3bf7-4a5b-b840-d0267adb1b60
+![Wey micro code](https://github.com/Lt2023/Wey-Studio-public-/assets/122614217/d10c21c4-4bcb-4896-8a8e-969f9bc636b7)
 
 
-你可以找到相对应的文件，并且把它克隆到本地！
+## 🆕2.Wey SAI
+
+
+![weysai](https://github.com/Lt2023/Wey-Studio-public-/assets/122614217/2b798fcc-2dd9-4881-96b1-62250cd8364f)
+
+
+
+## 🆕3.Continue with Wey account 11
+
+![wey coco](https://github.com/Lt2023/Wey-Studio-public-/assets/122614217/78b9ea83-750b-43ae-af56-7b14d5c7ac02)
+
+## 🌟Further understanding wey Studio (https://home.weycloud.top)
+
+You can find the corresponding file and clone it locally!
 
