@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./Axios.min.js"></script>
+    <title>wey SAI</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        #chatbox {
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #e6f2ff;
+            padding: 50px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-message {
+            background-color: #d7f1e5;
+            text-align: right;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #d9edf7;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .message-content {
+            margin: 0;
+            direction: ltr;
+            white-space: pre-wrap;
+        }
+
+        .message-meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        #input {
+            flex: 1;
+            padding: 5px;
+        }
+
+        #send-btn {
+            padding: 5px 10px;
+            margin-left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #send-btn:hover {
+            background-color: #45a049;
+        }
+
+        .copy-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 2px 8px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* 媒体查询，手机屏幕下的样式 */
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Wey  Studio - wey SAI</div>
+        <div class="subtitle">Wey Studio</div>
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <textarea id="input" placeholder="快发送你的问题给SAI吧!"></textarea>
+            <button id="send-btn">发送</button>
+        </div>
+    </div>
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const input = document.getElementById('input');
+        const sendBtn = document.getElementById('send-btn');
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const message = input.value;
+            if (message.trim() !== '') {
+                addMessage('user', message);
+                fetchChatResponse(message);
+                input.value = '';
+            }
+        }
+
+        async function fetchChatResponse(message) {
+            const url = `wey sai api=${encodeURIComponent(message)}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                addMessage('bot', data);
+            } catch (error) {
+                console.log('Error:', error);
+            }
+        }
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            const senderClass = sender === 'user' ? 'user-message' : 'bot-message';
+            messageElement.classList.add('message', senderClass);
+
+            const messageContent = document.createElement('p');
+            messageContent.textContent = message;
+            messageContent.classList.add('message-content');
+            messageElement.appendChild(messageContent);
+
+            const messageMeta = document.createElement('span');
+            const date = new Date();
+            const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            messageMeta.textContent = `${sender === 'user' ? 'You' : 'sai'} • ${timeString}`;
+            messageMeta.classList.add('message-meta');
+            messageElement.appendChild(messageMeta);
+
+            // 添加复制按钮
+            const copyButton = document.createElement('button');
+            copyButton.textContent = '复制';
+            copyButton.classList.add('copy-btn');
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(message).then(() => {
+                    copyButton.textContent = '已复制';
+                    setTimeout(() => {
+                        copyButton.textContent = '复制';
+                    }, 2000);
+                });
+            });
+            messageElement.appendChild(copyButton);
+
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>
